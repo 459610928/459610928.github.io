@@ -179,24 +179,9 @@ var _hmt = _hmt || [];
         <h1 id="函数和装饰器"><a href="#函数和装饰器" class="headerlink" title="函数和装饰器"></a>函数和装饰器</h1><blockquote>
 <p>​    函数 (function) 是指一个有命名的、执行某个计算的语句序列 (sequence of statements) 。在定义一个函数的时候，你需要指定函数的名字和语句序列。 之后，你可以通过这个名字 “调用 (call)’’ 该函数。</p>
 <p>​    def 是一个关键字，表明这是一个函数定义。这个函数的名字是 num_sum。函数的命名规则与变量名相同：字母、数字以及下划线是合法的，但是第一个字符不能是数字。 不能使用关键字作为函数名，并应该避免变量和函数同名。<br>​    函数名后面的圆括号中的 x, y 是函数的形参 。<br>​    函数定义的第一行被称作函数头 (header)；其余部分被称作函数体 (body)。函数头必 须以冒号结尾，而函数体必须缩进。按照惯例，缩进总是4个空格。函数体能包含任意 条语句。</p>
-</blockquote>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#求和函数</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">num_sum</span><span class="params">(x,y)</span>:</span></div><div class="line">    res = x + y</div><div class="line">    <span class="keyword">return</span> res</div></pre></td></tr></table></figure>
-<blockquote>
-<p>​    装饰器（decorator）使得函数和方法封装（接收一个函数并返回增强版本的一个函数）更容易阅读和理解。</p>
-<p>简单的说装饰器就是对函数的中再次加工，使函数的功能更加完善，和java中的继承有点类似。</p>
-</blockquote>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 简单装饰器</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">mydecorator</span><span class="params">(func)</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">_mydecorator</span><span class="params">(*args,**kw)</span>:</span></div><div class="line">        <span class="comment"># 调用实际函数之前做些填充工作</span></div><div class="line">        print(<span class="string">"运行前"</span>)</div><div class="line">        res = func(*args,**kw)</div><div class="line">        <span class="comment"># 做完某些填充工作后</span></div><div class="line">        print(<span class="string">"运行后"</span>)</div><div class="line">        <span class="keyword">return</span> res</div><div class="line">    <span class="comment"># 返回函数</span></div><div class="line">    <span class="keyword">return</span> _mydecorator</div></pre></td></tr></table></figure>
-<blockquote>
-<p>​    当装饰器需要参数时，必须使用第二级封装</p>
-<p>​    装饰器在模块第一次被读取时由解释程序装入，所以它们的使用必须受限于总体上可以应用的装饰器。</p>
-<p>如果装饰器与方法的类或过增强的函数签名绑定，它应该被重构为常规的可调用对象，从而避免复杂性。在任何情况下，当装饰器处理API时，一个好的方法是将它们聚集到一个易于维护的模块中。</p>
-</blockquote>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 带参数的装饰器</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">mydecorator</span><span class="params">(arg1,arg2)</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">_mydecorator</span><span class="params">(func)</span>:</span></div><div class="line">        <span class="function"><span class="keyword">def</span> <span class="title">__mydecorator</span><span class="params">(*args,**kw)</span>:</span></div><div class="line">            <span class="comment"># 调用实际函数之前做些填充工作</span></div><div class="line">            print(<span class="string">"运行前"</span>)</div><div class="line">            res = func(*args,**kw)</div><div class="line">            <span class="comment"># 做完某些填充工作后</span></div><div class="line">            print(<span class="string">"运行后"</span>)</div><div class="line">            <span class="keyword">return</span> res</div><div class="line">        <span class="comment"># 返回函数</span></div><div class="line">        <span class="keyword">return</span> __mydecorator</div><div class="line">    <span class="keyword">return</span> _mydecorator</div></pre></td></tr></table></figure>
-<blockquote>
-<p>示例：</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">def mydecorator(func):</div><div class="line">    def _mydecorator(*args,**kw):</div><div class="line">        # 调用实际函数之前做些填充工作</div><div class="line">        print(&quot;函数运行&quot;)</div><div class="line">        res = func(*args,**kw)</div><div class="line">        # 做完某些填充工作后</div><div class="line">        print(&quot;%s运行后结果：%s&quot;%(func.__name__,res))</div><div class="line">        return res</div><div class="line">    # 返回函数</div><div class="line">    return _mydecorator</div><div class="line"></div><div class="line">@mydecorator</div><div class="line">def num_sum(x,y):</div><div class="line">    res = x + y</div><div class="line">    return res</div><div class="line"></div><div class="line">num_sum(1,2)</div></pre></td></tr></table></figure>
-
+        
+          <a class="article-more-a" href="/2017/07/30/function-and-ornaments/#more">more >></a>
+        
       
 
       
@@ -280,22 +265,10 @@ var _hmt = _hmt || [];
      9.显示行号：Setting&gt;Edit&gt;General&gt;Appearance&gt;Show line numbers
      10.右侧竖线是PEP8的代码规范，提示一行不要超过120个字符
      11.导出、导入你自定义的配置：File&gt;Export Settings、Import Settings
-</code></pre><h1 id="常用快捷键"><a href="#常用快捷键" class="headerlink" title="常用快捷键"></a>常用快捷键</h1><pre><code>1.常用快捷键的查询和配置：Setting&gt;Keymap
-     1.Ctrl+D:复制当前行
-     2.Ctrl+Y:删除当前行
-     3.Shift+Enter:快速换行
-     4.Ctrl+/:快速注释(选中多行后可以批量注释)
-     5.Tab：缩进当前行（选中多行后可以批量缩进）
-     6.Shift+Tab：取消缩进（选中多行后可以批量取消缩进）
-     7.Ctrl+F：查找
-     8.Ctrl+H:替换
-     9.Ctrl+减号：折叠当前代码块
-     10.Ctrl+Shift+减号：折叠当前文件
-2.设置快捷键
-</code></pre><h1 id="Pycharm安装插件"><a href="#Pycharm安装插件" class="headerlink" title="Pycharm安装插件"></a>Pycharm安装插件</h1><pre><code>1.Setting&gt;Plugins&gt;Browse repositories(下方三个按钮中间那个)&gt;搜索 &gt;install。右上角View有三个选项可选。
-</code></pre><h1 id="常用操作指南"><a href="#常用操作指南" class="headerlink" title="常用操作指南"></a>常用操作指南</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">1.复制文件路径:左侧文件列表右键选中文件&gt;Copy Path</div><div class="line">2.在文件管理器中打开：右键选中的文件&gt;往下找到Show In Explorer</div><div class="line">3.快速定位：Ctrl+某些内建模块之后，点击在源文件中展开</div><div class="line">4.查看结构：IDE左侧边栏Structure查看当前项目的结构</div><div class="line">5.tab批量换space:Edit&gt;Convert Indents</div><div class="line">6.TODO的使用：#TODO要记录的事情，commit之前会有提示</div><div class="line">7.Debug设置断点，直接点击行号与代码之间的空白处即可设置断点，debug一般只需要在关键点设置一个，然后degug调试时步进执行。没必         要设置很多断点</div><div class="line">8.Tab页上右键&gt;Move Right(Down), 把当前Tab页移到窗口右边/下辺，方便对比</div><div class="line">9.文件中右键&gt;Local History能够查看文件修改前后的对比</div><div class="line">10.IDE右下角能看到一些有用的信息，光标当前在第几行的第几个字符，当前回车换行，当前编码类型，当前Git分支</div><div class="line">11.右边栏Database(点开后)&gt;左上角绿色+&gt;下拉Data Source选择你要连接的数据库类型&gt;点击之后页面最下方会有提示安装驱动</div><div class="line">12.执行某个文件中的某一行（某些行）：选中要执行的代码部分&gt;右键Execute Selection in Console</div></pre></td></tr></table></figure>
-<h1 id="如何去掉烦人的波浪线？PEP8又是什么？"><a href="#如何去掉烦人的波浪线？PEP8又是什么？" class="headerlink" title="如何去掉烦人的波浪线？PEP8又是什么？"></a>如何去掉烦人的波浪线？PEP8又是什么？</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">1.settings&gt;Editor&gt;Inspections&gt;Python</div><div class="line">2.单独一行的注释：#+1空格+注释内容</div><div class="line">3.代码后跟着的注释：2空格+#+1空格+注释内容</div><div class="line">4.函数前面空一行，类前面空两行</div><div class="line">5.某些单词一直有下划线提示，可以右键&gt;Spelling&gt;Typo:Save &apos;xxx&apos; to dictionary</div></pre></td></tr></table></figure>
-<h1 id="Live-Templates（善用live-templates-提高开发效率）"><a href="#Live-Templates（善用live-templates-提高开发效率）" class="headerlink" title="Live Templates（善用live templates 提高开发效率）"></a>Live Templates（善用live templates 提高开发效率）</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Settings&gt;Editor&gt;Live Templates</div></pre></td></tr></table></figure>
+</code></pre>
+        
+          <a class="article-more-a" href="/2017/07/27/article-title/#more">more >></a>
+        
       
 
       
